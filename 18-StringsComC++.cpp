@@ -5,9 +5,10 @@
 
 using namespace std;
 
-//Função principal do programa
+//Funï¿½ï¿½o principal do programa
 int main(){
-
+    int a = 100;
+    int b = 200;
     //Definindo uma String
     string palavra;
 
@@ -17,10 +18,10 @@ int main(){
     //Lendo uma string
     cin >> palavra;
 
-    //Imprimindo uma variável
+    //Imprimindo uma variï¿½vel
     cout << "\nA palavra eh:" << palavra;
 
-    //Pausa o programa após executar
+    //Pausa o programa apï¿½s executar
     system("pause");
 
     return 0;
