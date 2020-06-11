@@ -2,16 +2,15 @@
 #include <stdlib.h>
 #include <locale.h>
 
+//Função principal do programa
 void main(){
-    int a, b, c;
-    printf("leia a:");
-    scanf("%d", a);
-    printf("\nleia b:");
-    scanf("%d", b);
-    printf("\nleia c:");
-    scanf("%d", c);
-
-    printf("variables %d, %d, %d", a, b, c);
-
+    int nome = 100;
+    //Imprime na tela
+    printf("\n Hello World!\n");
+    printf("%d\n", nome);
+    
+    //Pausa o programa após executar
+    system("pause");
 
 }
+
