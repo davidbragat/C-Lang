@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 
-//Função principal do programa
-void main(){
+void main()
+{
+    setlocale(LC_ALL, "Portuguese");
 
-    //Definindo Variáveis
+
+
+    //Definindo VariÃ¡veis
     int a = 4,opcao = 3;
     float b = 2.5;
     char c = 'x';
@@ -20,7 +24,7 @@ void main(){
         printf("\n A variavel c = letra x");
     }
 
-    //Número par ou impar
+    //NÃºmero par ou impar
     if(a % 2 == 1){
         printf("\n A variavel a eh impar");
     }else{
@@ -36,7 +40,7 @@ void main(){
         printf("\nA opcao nao eh igual a 1 e nem 2");
     }
 
-    //Pausa o programa após executar
+    //Pausa o programa apÃ³s executar
     system("pause");
 
 }

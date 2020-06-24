@@ -1,28 +1,41 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
+#include<locale.h>
 
-//Função principal do programa
+//Funï¿½ï¿½o principal do programa
 void main(){
 
-    //Variáveis
+setlocale(LC_ALL,"");
+/* 
     char palavra[10];
 
-    //Instrução
+    //Instruï¿½ï¿½o
     printf("Digite uma palavra");
 
     //Limpa o Buffer
     setbuf(stdin, 0);
 
-    //Lê a String
+    //Lï¿½ a String
     fgets(palavra, 255, stdin);
 
-    //Limpa as casas não utilizadas
+    //Limpa as casas nï¿½o utilizadas
     palavra[strlen(palavra)-1] = '\0';
 
     //Imprime na tela
-    printf("%s", palavra);
+    printf("%s", palavra); */
 
-    //Pausa o programa após executar
+char st[40] = "DAVID";
+int i;
+for (i=0;st[i];i++){
+    st[i] = tolower(st[i]);
+}
+
+printf("DAVID, passarÃ¡ para minÃºscula ...\n", st);
+printf("%s \n");
+
+
+    //Pausa o programa apï¿½s executar
     system("pause");
 
 }
