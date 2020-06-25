@@ -3,29 +3,29 @@
 #include <locale.h>
 #define TAM 5
 
-
-
 long createVector(long v[], int);
-long printVector(long v[], int);
-void bubblesort(long v[], int);
-long troca(long v[], int i, int j);
+long printVector();
+void bubblesort();
+long troca(int i, int j);
 char menu();
 
-int main(){
-    long vector[TAM];
+long vector[TAM];
+int main()
+{
     int option;
-    
+
     createVector(vector, TAM);
-    printVector(vector, TAM);
+    printVector(TAM);
 
     menu();
     scanf("%d", &option);
     //printf("\n%d", option);
-    switch (option){
+    switch (option)
+    {
     case 1:
         printf("first option works");
-        bubblesort(vector,TAM);
-        printVector(vector, TAM);
+        bubblesort();
+        printVector(TAM);
         break;
     case 2:
         printf("second option works");
@@ -42,83 +42,49 @@ int main(){
     default:
         break;
     }
-
 }
 
-void bubblesort(long v[], int t){
-    for(int i = 0; i<t-1; i++){
-        for(int j=i+1; i<t; j++){
-            if(v[i] > v[j]){
-                troca(v, i, j);
+void bubblesort()
+{
+    for (int i = 0; i < TAM - 1; i++)
+    {
+        for (int j = i + 1; j < TAM; j++)
+        {
+            if (vector[i] > vector[j])
+            {
+                troca(i, j);
             }
         }
     }
-}//end bubblesort
 
-long troca(long *v, int i, int j){
-    long *key = &v[i];
-    v[i] = v[j];
-    v[j] = *key;
+} //end bubblesort
+
+long troca(int i, int j)
+{
+    int key = vector[i];
+    vector[i] = vector[j];
+    vector[j] = key;
 }
 
-char menu(){
+char menu()
+{
     printf("\n1.Bublesort\n2.Selectionsort\n3.Insertionsort\n4.Shellsort\n0.Exit");
     printf("\nSelect an option: ");
-
 }
 
-long createVector(long v[], int t){
-    for (int i=0; i<t; i++){
-        v[i] = rand()/100 + 1;    }
-}
-
-long printVector(long v[], int t){
-        printf("Vector: ");
-    for (int i=0; i<t; i++){
-        printf("%ld, ", v[i]);
-    }
-}
-
-/* void bubble_sort(long[], long);
-
-int main()
+long createVector(long v[], int t)
 {
-    long array[100], n, c, d, swap;
-
-    printf("Enter number of elements\n");
-    scanf("%ld", &n);
-
-    printf("Enter %ld longegers\n", n);
-
-    for (c = 0; c < n; c++)
-        scanf("%ld", &array[c]);
-
-    bubble_sort(array, n);
-
-    printf("Sorted list in ascending order:\n");
-
-    for (c = 0; c < n; c++)
-        printf("%ld\n", array[c]);
-
-    return 0;
-}
-
-void bubble_sort(long list[], long n)
-{
-    long c, d, t;
-
-    for (c = 0; c < (n - 1); c++)
+    for (int i = 0; i < t; i++)
     {
-        for (d = 0; d < n - c - 1; d++)
-        {
-            if (list[d] > list[d + 1])
-            {
-                /* Swapping */
-/*
-                t = list[d];
-                list[d] = list[d + 1];
-                list[d + 1] = t;
-            }
-        }
+        v[i] = rand() % 17 + 1;
     }
-} */
+}
+
+long printVector()
+{
+    printf("Vector: ");
+    for (int i = 0; i < TAM; i++)
+    {
+        printf("%ld, ", vector[i]);
+    }
+}
