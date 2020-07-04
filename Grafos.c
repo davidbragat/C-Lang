@@ -9,23 +9,27 @@ int tam = 0;
 int grafo[maximo];
 int ma[maximo][maximo];
 int option;
+int direct;
 
 //Prototypes
 void menu();
 int grafo_tamanho();
 void inserir_aresta();
 void remover_aresta();
-void print_vetor();
+void print_vetor(int tam);
 void print_ma();
+int grafo_dir();
 
-void main(){
-setlocale(LC_ALL, "Portuguese");
+void main()
+{
+    setlocale(LC_ALL, "Portuguese");
 
     do{
         menu();
         scanf("%d", &option);
         switch (option){
         case 1:
+            grafo_dir();
             grafo_tamanho();
             break;
 
@@ -38,7 +42,7 @@ setlocale(LC_ALL, "Portuguese");
             break;
         
         case 4: 
-            print_vetor();
+            print_vetor(tam);
             break;
         
         case 5: 
@@ -50,7 +54,7 @@ setlocale(LC_ALL, "Portuguese");
         }
     } while (option != 0);
 
-}//END MAIN FUNCTION
+} //END MAIN FUNCTION
 
 void menu(){
     system("cls");
@@ -65,10 +69,23 @@ void menu(){
 
 }
 
+int grafo_dir(){
+    printf("O Grafo é dirigido?\n1. Sim\n2. Não\n");
+    scanf("%d", &direct);
+    if (direct < 1 || direct > 2){
+        printf("Opção Incorreta.\nDigite novamente\n");
+        scanf("%d", &direct);
+    }
+    return direct;
+}
+
 //define the number of vertices
 int grafo_tamanho(){
     printf("Quantidade de vértices do grafo: ");
     scanf("%d", &tam);
+    for (int i = 0; i < tam; i++){
+        grafo[i] = i;
+    }
     return tam;
 }
 
@@ -86,9 +103,12 @@ void inserir_aresta(){
         system("pause");
         inserir_aresta();
     }
-    else{
+    else if(direct == 2){
         ma[div][conv] = 1;
         ma[conv][div] = 1;
+    }
+    else{
+        ma[div][conv] = 1;
     }
 }
 
@@ -106,16 +126,23 @@ void remover_aresta(){
         system("pause");
         remover_aresta();
     }
-    else{
+    else if (direct == 2){
         ma[div][conv] = 0;
         ma[conv][div] = 0;
     }
+    else{
+        ma[div][conv] = 0;
+    }
 }
 
-void print_vetor(){
-    for (int i = 0; i < tam; i++){
+void print_vetor(int tam){
+    int i;
+    printf("Lista de Vértices \n[");
+    for (i = 0; i < tam-1; i++){
         printf("%d, ", grafo[i]);
     }
+    printf("%d", grafo[i]);
+    printf("]\n");
     system("\npause");
 }
 
