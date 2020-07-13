@@ -154,6 +154,5 @@ void print_ma(){
         }
         printf("\n");
     }
-    
     system("\npause");
 }
