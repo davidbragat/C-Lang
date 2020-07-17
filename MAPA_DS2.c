@@ -24,40 +24,52 @@ void imprimir(struct dadosCSV cvsData[], int n) {
     int i;
     for (i = 0; i < n; i++) {
         printf("%d\t", cvsData[i].matricula);
-        printf("%s\t", cvsData[i].aluno);
+        printf("%s-30s\t", cvsData[i].aluno);
         printf("%d\t", cvsData[i].anoColacao);
         printf("%s\t", cvsData[i].data);
-        printf("%s\t", cvsData[i].anoIngresso);
-        printf("%s\t", cvsData[i].periodo);
+        printf("%d\t", cvsData[i].anoIngresso);
+        printf("%d\t", cvsData[i].periodo);
         printf("%s\t", cvsData[i].campus);
-        printf("%d\t", cvsData[i].curso);
-        printf("%d\t", cvsData[i].modalidade);
-        printf("%d\t", cvsData[i].formaIngresso);
+        printf("%s\t", cvsData[i].curso);
+        printf("%s\t", cvsData[i].modalidade);
+        printf("%s\t", cvsData[i].formaIngresso);
         printf("\n");
     }
     printf("\n");
 }
 
-/* void insertionSort(struct dadosCSV *V, int N) {
-    int i, j;
-    struct dadosCSV aux;
+//HEADER Método de Ordenação - Selectionsort
+void troca(struct dadosCSV* a, struct dadosCSV* b) {
+    struct dadosCSV tmp;
+    tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
 
-    for (i = 1; i < N; i++) {
-        aux = V[i];
-        for (j = i; (j > 0) && (strcmp(aux.matricula, V[j - 1].matricula) < 0); j--)
-            V[j] = V[j - 1];
-        V[j] = aux;
+int selectionSort(struct dadosCSV vec[], int tam) {
+    int i, j, min, qtd = 0;
+    for (i = 0; i < (tam - 1); i++) {
+        min = i;
+        for (j = (i + 1); j < tam; j++) {
+            if (vec[j].matricula < vec[min].matricula) {
+                min = j;
+            }
+            qtd++;
+        }
+        if (i != min) {
+            troca(&vec[i], &vec[min]);
+        }
     }
-} */
+    return (qtd);
+}
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
-    int tamanho = 50;
+    int tamanho;
     int countLinhas = 0;
-    int contador = 0, it = 0, linha = 0;
-
-    char auxArquivo[TAM];  //FIXIT -> strVecTemp
+    int contador = 0;
+    int linha = 0;
     char buf[TAM];         //FIXIT -> strVec
 
     FILE *csv = fopen("dados.csv", "r");
@@ -67,11 +79,21 @@ int main() {
         return EXIT_FAILURE;
     }
 
-    while (fgets(buf, TAM, csv)) {
+//HEADER MENU
+    printf("Deseja imprimir quantas linhas?\n");
+    scanf("%d", &tamanho);
+
+    while (tamanho <= 0) {
+        printf("Valor inválido.");
+        scanf("%d", &tamanho);
+    }
+
+
+    while (fgets(buf, TAM, csv) && linha <= tamanho) {
         contador = 0;
         countLinhas++;
 
-        if (countLinhas <= 1) continue;//FIXIT countLinhas should start in 1
+        if (countLinhas <= 1) continue;
 
         char *field = strtok(buf, ";");
         while (field) {
@@ -117,17 +139,9 @@ int main() {
 
     }
 
-
-    printf("Dados originais\n");
-    printf("matricula   aluno   anoColacao   data   anoIngresso   periodo   campus   curso\n");
+    selectionSort(cvsData, tamanho);
     imprimir(cvsData, tamanho);
 
-    //insertionSort(cvsData, tamanho);
-
-    /*printf("Dados ordenados\n");
-    printf("matricula   aluno   anoColacao   data   anoIngresso   periodo   campus   curso\n");
-    imprimir(cvsData, tamanho);
- */
     fclose(csv);
     return 0;
 }
