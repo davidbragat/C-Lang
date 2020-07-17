@@ -6,13 +6,13 @@
 #define TAM 1024
 
 typedef struct dadosCSV {
-    char matricula[10];
-    char aluno[200];
-    char anoColacao[6];
-    char data[20];
-    char anoIngresso[6];
-    char periodo[3];
-    char campus[30];
+    int matricula;
+    char aluno[100];
+    int anoColacao;
+    char data[10];
+    int anoIngresso;
+    int periodo;
+    char campus[10];
     char curso[30];
     char modalidade[30];
     char formaIngresso[30];
@@ -53,7 +53,7 @@ void imprimir(struct dadosCSV cvsData[], int n) {
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
-    int tamanho = 117;
+    int tamanho = 50;
     int countLinhas = 0;
     int contador = 0, it = 0, linha = 0;
 
@@ -71,27 +71,31 @@ int main() {
         contador = 0;
         countLinhas++;
 
-        if (countLinhas <= 1) continue;
+        if (countLinhas <= 1) continue;//FIXIT countLinhas should start in 1
 
         char *field = strtok(buf, ";");
         while (field) {
             if (contador == 0) {
-                strcpy(cvsData[linha].matricula, field);
+                char* matricula = field;
+                cvsData[linha].matricula = atoi(field);
             }
             if (contador == 1) {
                 strcpy(cvsData[linha].aluno, field);
             }
             if (contador == 2) {
-                strcpy(cvsData[linha].anoColacao, field);
+                char* anoColacao = field;
+                cvsData[linha].anoColacao = atoi(field);
             }
             if (contador == 3) {
                 strcpy(cvsData[linha].data, field);
             }
             if (contador == 4) {
-                strcpy(cvsData[linha].anoIngresso, field);
+                char* anoIngresso = field;
+                cvsData[linha].anoIngresso = atoi(field);
             }
             if (contador == 5) {
-                strcpy(cvsData[linha].periodo, field);
+                char* periodo = field;
+                cvsData[linha].periodo = atoi(field);
             }
             if (contador == 6) {
                 strcpy(cvsData[linha].campus, field);
@@ -109,21 +113,21 @@ int main() {
             field = strtok(NULL, ";");
             contador++;
         }
-    }
-
     linha++;
 
-    fclose(csv);
-    return 0;
+    }
 
-    /* printf("Dados originais\n");
+
+    printf("Dados originais\n");
     printf("matricula   aluno   anoColacao   data   anoIngresso   periodo   campus   curso\n");
     imprimir(cvsData, tamanho);
 
     //insertionSort(cvsData, tamanho);
 
-    printf("Dados ordenados\n");
+    /*printf("Dados ordenados\n");
     printf("matricula   aluno   anoColacao   data   anoIngresso   periodo   campus   curso\n");
     imprimir(cvsData, tamanho);
  */
+    fclose(csv);
+    return 0;
 }
