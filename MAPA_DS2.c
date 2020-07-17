@@ -24,13 +24,13 @@ void imprimir(struct dadosCSV cvsData[], int n) {
     int i;
     for (i = 0; i < n; i++) {
         printf("%d\t", cvsData[i].matricula);
-        printf("%s-30s\t", cvsData[i].aluno);
+        printf("%-50s\t", cvsData[i].aluno);
         printf("%d\t", cvsData[i].anoColacao);
         printf("%s\t", cvsData[i].data);
         printf("%d\t", cvsData[i].anoIngresso);
-        printf("%d\t", cvsData[i].periodo);
-        printf("%s\t", cvsData[i].campus);
-        printf("%s\t", cvsData[i].curso);
+        printf("  %d\t", cvsData[i].periodo);
+        printf("%-7s\t", cvsData[i].campus);
+        printf("%-25s\t", cvsData[i].curso);
         printf("%s\t", cvsData[i].modalidade);
         printf("%s\t", cvsData[i].formaIngresso);
         printf("\n");
@@ -66,11 +66,11 @@ int selectionSort(struct dadosCSV vec[], int tam) {
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
-    int tamanho;
-    int countLinhas = 0;
-    int contador = 0;
-    int linha = 0;
-    char buf[TAM];         //FIXIT -> strVec
+    int size;
+    int lineCounter = 0;
+    int counter = 0;
+    int line = 0;
+    char strVec[TAM];
 
     FILE *csv = fopen("dados.csv", "r");
 
@@ -81,66 +81,67 @@ int main() {
 
 //HEADER MENU
     printf("Deseja imprimir quantas linhas?\n");
-    scanf("%d", &tamanho);
+    scanf("%d", &size);
 
-    while (tamanho <= 0) {
+    while (size <= 0) {
         printf("Valor inválido.");
-        scanf("%d", &tamanho);
+        scanf("%d", &size);
     }
 
 
-    while (fgets(buf, TAM, csv) && linha <= tamanho) {
-        contador = 0;
-        countLinhas++;
+    while (fgets(strVec, TAM, csv) && line <= size) {
+        counter = 0;
+        lineCounter++;
 
-        if (countLinhas <= 1) continue;
+        if (lineCounter <= 1) continue;
 
-        char *field = strtok(buf, ";");
+        char *field = strtok(strVec, ";");
         while (field) {
-            if (contador == 0) {
+            if (counter == 0) {
                 char* matricula = field;
-                cvsData[linha].matricula = atoi(field);
+                cvsData[line].matricula = atoi(field);
             }
-            if (contador == 1) {
-                strcpy(cvsData[linha].aluno, field);
+            if (counter == 1) {
+                strcpy(cvsData[line].aluno, field);
             }
-            if (contador == 2) {
+            if (counter == 2) {
                 char* anoColacao = field;
-                cvsData[linha].anoColacao = atoi(field);
+                cvsData[line].anoColacao = atoi(field);
             }
-            if (contador == 3) {
-                strcpy(cvsData[linha].data, field);
+            if (counter == 3) {
+                strcpy(cvsData[line].data, field);
             }
-            if (contador == 4) {
+            if (counter == 4) {
                 char* anoIngresso = field;
-                cvsData[linha].anoIngresso = atoi(field);
+                cvsData[line].anoIngresso = atoi(field);
             }
-            if (contador == 5) {
+            if (counter == 5) {
                 char* periodo = field;
-                cvsData[linha].periodo = atoi(field);
+                cvsData[line].periodo = atoi(field);
             }
-            if (contador == 6) {
-                strcpy(cvsData[linha].campus, field);
+            if (counter == 6) {
+                strcpy(cvsData[line].campus, field);
             }
-            if (contador == 7) {
-                strcpy(cvsData[linha].curso, field);
+            if (counter == 7) {
+                strcpy(cvsData[line].curso, field);
             }
-            if (contador == 8) {
-                strcpy(cvsData[linha].modalidade, field);
+            if (counter == 8) {
+                strcpy(cvsData[line].modalidade, field);
             }
-            if (contador == 9) {
-                strcpy(cvsData[linha].formaIngresso, field);
+            if (counter == 9) {
+                strcpy(cvsData[line].formaIngresso, field);
             }
 
             field = strtok(NULL, ";");
-            contador++;
+            counter++;
         }
-    linha++;
+    line++;
 
     }
 
-    selectionSort(cvsData, tamanho);
-    imprimir(cvsData, tamanho);
+    selectionSort(cvsData, size);
+    printf(" RA                 ALUNO                                     COLAÇÃO       DATA      INGRESSO   PER     CAMPUS         CURSO                  MODALIDADE    FORMA INGRESSO\n");
+    imprimir(cvsData, size);
 
     fclose(csv);
     return 0;
