@@ -110,6 +110,7 @@ void headerField(int headerCount, char *value) {
         default:
             break;
     }
+
     printf("%s\n", value);
 
 }

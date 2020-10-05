@@ -12,15 +12,31 @@
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
-                "cwd": "C:\\MinGW\\bin\\"
+                "cwd": "C:/MinGW/bin"
             },
             "problemMatcher": [
                 "$gcc"
             ],
             "group": {
-                "kind":"build",
+                "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Compile C",
+            "command": "gcc ${fileBasename} -o ${fileBasenameNoExtension}.exe",
+            "type": "shell",
+            "args": [],
+            "problemMatcher": []
+        },
+
+        {
+            "label": "Run .exe",
+            "command": "./${fileBasenameNoExtension}.exe",
+            "type": "shell",
+            "args": [],
+            "problemMatcher": []
         }
     ],
+
 }

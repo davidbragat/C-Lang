@@ -3,23 +3,23 @@
 #include <conio.h>
 #include<locale.h>
 
-//Funï¿½ï¿½o principal do programa
+//Fun??o principal do programa
 void main(){
 
 setlocale(LC_ALL,"");
 /* 
     char palavra[10];
 
-    //Instruï¿½ï¿½o
+    //Instru??o
     printf("Digite uma palavra");
 
     //Limpa o Buffer
     setbuf(stdin, 0);
 
-    //Lï¿½ a String
+    //L? a String
     fgets(palavra, 255, stdin);
 
-    //Limpa as casas nï¿½o utilizadas
+    //Limpa as casas n?o utilizadas
     palavra[strlen(palavra)-1] = '\0';
 
     //Imprime na tela
@@ -31,11 +31,11 @@ for (i=0;st[i];i++){
     st[i] = tolower(st[i]);
 }
 
-printf("DAVID, passarÃ¡ para minÃºscula ...\n", st);
+printf("DAVID, passará para minúscula ...\n", st);
 printf("%s \n");
 
 
-    //Pausa o programa apï¿½s executar
+    //Pausa o programa ap?s executar
     system("pause");
 
 }
